@@ -2,10 +2,35 @@ var express = require('express');
 
 var app = express();
 
-console.log('the value of the __dirname is:' __dirname);
+app.get('/vote', function(req, res) {
+    res.send('GET request success');
+});
 
-app.get('/resume/download', function(req, res) {
+app.post('/vote', function(req, res) {
+    res.send('POST request success');
+});
+
+app.put('/vote/:voteId', function(req, res) {
+    res.send('PUT request success for vote with ID of ' + req.params.voteId + ' has now been updated. ');
+});
+
+app.delete('/vote/:voteId', function(req, res) {
+    res.send('DELETE request success for vote with ID of ' + req.params.voteId + ' has now been deleted. ');
+});
+
+/* app.use(express.static(__dirname + '/public/')); */
+
+/* app.get('/', function(req, res) {
+    res.sendFile(__dirname + '/views/home.html');
+}); */
+
+/* app.get('/resume/download', function(req, res) {
     res.download(__dirname + '/public/cv.pdf');
+}); */
+
+app.get('*', function(req, res) {
+    res.status(404).end()
+    //res.status(404).sendFile(__dirname + '/views/404.html');
 });
 
 
